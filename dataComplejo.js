@@ -1257,8 +1257,7 @@ console.log("\n");
 console.log("Punto 3 - Marcas con más del 40% de alcohol:");
 data.categorias.flatMap(categoria => 
   categoria.paises.flatMap(pais => 
-    pais.marcas
-      .filter(marca => marca.porcentajeAlcohol > 40)
+    pais.marcas.filter(marca => marca.porcentajeAlcohol > 40)
       .map(marca => console.log(`${marca.nombre}: ${marca.porcentajeAlcohol}%`))
   )
 );
