@@ -1242,7 +1242,6 @@ console.log("\n");
 
 console.log("Punto 2 - Paises unicos:");
 const paisesVistos = new Set();
-
 data.categorias.forEach(categoria => {
   categoria.paises.forEach(pais => {
     if (!paisesVistos.has(pais.pais)) {
@@ -1269,8 +1268,7 @@ console.log("\n");
 
 console.log("Punto 4 - Marcas baratas disponibles online:");
 data.categorias.flatMap(categoria => 
-  categoria.paises.flatMap(pais => 
-    pais.marcas
+  categoria.paises.flatMap(pais => pais.marcas
       .filter(marca => marca.precioUSD < 30 && marca.disponibleOnline)
       .map(marca => console.log(`${marca.nombre}: $${marca.precioUSD}`))
   )
@@ -1308,11 +1306,9 @@ console.log("\n");
 
 
 console.log("Punto 7 - Marcas con stock bajo:");
-data.categorias
-  .flatMap(categoria => categoria.paises)
+data.categorias.flatMap(categoria => categoria.paises)
   .forEach(pais => {
-    pais.marcas
-      .filter(marca => marca.stockUnidades < 50)
+    pais.marcas.filter(marca => marca.stockUnidades < 50)
       .forEach(marca => {
         console.log(`${marca.nombre} (${pais.pais}): ${marca.stockUnidades} unidades`);
       });
@@ -1324,8 +1320,7 @@ console.log("\n");
 console.log("Punto 8 - Estas son todas las marcas ordenadas por su Promedio: ");
 const valPromedio = data.categorias
   .flatMap(c => c.paises.flatMap(p => p.marcas))
-  .sort((a, b) => b.valoracionPromedio - a.valoracionPromedio)
-  .forEach(marca => {
+  .sort((a, b) => b.valoracionPromedio - a.valoracionPromedio).forEach(marca => {
     console.log(`${marca.nombre}: "Promedio: "${marca.valoracionPromedio.toFixed(1)}`);
   });
 console.log("\n");
@@ -1348,7 +1343,7 @@ console.log("Punto 10 - Calcular el stock disponible por tipo de licor:");
 data.categorias.forEach(categoria => {
   const totalStock = categoria.paises
     .flatMap(pais => pais.marcas)
-    .reduce((suma, marca) => suma + marca.stockUnidades, 0);
+    .reduce((suma, marca) => suma + marca.stockUnidades, 0); // el 0 es para que parta el contador desde 0
 
   console.log(`${categoria.tipo}: ${totalStock} unidades`);
 });
